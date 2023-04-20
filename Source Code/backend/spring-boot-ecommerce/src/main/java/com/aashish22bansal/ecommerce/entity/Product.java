@@ -1,29 +1,59 @@
 package com.aashish22bansal.ecommerce.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Table(name="product")
+@Data
 public class Product {
     /**
      * The @Entity denotes that this is an Entity and we will set up the JPA Annotation for Table to map this to the
      * Product.
      * We will use the @Data Annotation from the Lombok Project which will automatically generate the Getters and
      * Setters for the Project.
+     *
+     * We will be defining the Fields and for each of the Fields, we will need to add the JPA Mappings between the
+     * Actual Fields and Columns using the @Column Annotation. We will use the @Id Annotation for the ID Attribute.
+     * We will use the @CreationTimestamp and @UpdateTimestamp Annotation to automatically manage the Timestamp for
+     * the Attributes.
      */
-    // Defining the Fields
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "sku")
     private String sku;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "unit_price")
     private BigDecimal unitPrice;
+
+    @Column(name = "image_url")
     private String imageUrl;
+
+    @Column(name = "active")
     private boolean active;
+
+    @Column(name = "units_in_stock")
     private int unitsInStock;
+
+    @Column(name = "date_created")
+    @CreationTimestamp
     private Date dateCreated;
+
+    @Column(name = "last_updated")
+    @UpdateTimestamp
     private Date lastUpdated;
 }
