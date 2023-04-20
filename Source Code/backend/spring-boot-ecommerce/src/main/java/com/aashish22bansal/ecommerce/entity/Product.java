@@ -22,11 +22,18 @@ public class Product {
      * Actual Fields and Columns using the @Column Annotation. We will use the @Id Annotation for the ID Attribute.
      * We will use the @CreationTimestamp and @UpdateTimestamp Annotation to automatically manage the Timestamp for
      * the Attributes.
+     *
+     * The @ManyToOne Annotation is being used to define the other side of the relationship from the ProductCategory.java
+     * class. Along with this, we will also need to specify the Join Column using the @JoinColumn Annotation.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private ProductCategory category;
 
     @Column(name = "sku")
     private String sku;
