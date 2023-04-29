@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cab55173-71e8-4119-9f6d-74ac2a4a656c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/jar_files/automaton-1.11-8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/jar_files/kubernetes-model-metrics-5.12.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/.github/ISSUE_TEMPLATE/question.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/documentation/src/docs/asciidoc/release-notes/index.adoc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter-api/src/main/java/org/junit/jupiter/api/AfterEach.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter-api/src/main/java/org/junit/jupiter/api/AssertThrows.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter-api/src/main/java/org/junit/jupiter/api/ClassOrdererContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter-api/src/main/java/org/junit/jupiter/api/condition/EnabledIfEnvironmentVariable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter-engine/src/test/java/org/junit/jupiter/api/IndicativeSentencesTopLevelTestCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter-engine/src/test/java/org/junit/jupiter/api/subpackage/SubclassedAssertionsTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter-engine/src/test/java/org/junit/jupiter/engine/execution/ExtensionContextStoreTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter-engine/src/test/java/org/junit/jupiter/engine/extension/ExtensionContextExecutionTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter-engine/src/test/kotlin/org/junit/jupiter/api/KotlinAssertTimeoutAssertionsTests.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter-migrationsupport/src/main/java/org/junit/jupiter/migrationsupport/EnableJUnit4MigrationSupport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-jupiter/junit-jupiter.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-platform-commons/src/main/java/org/junit/platform/commons/util/ClassFileVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-platform-console/src/main/java/org/junit/platform/console/tasks/CustomContextClassLoaderExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-platform-engine/src/main/java/org/junit/platform/engine/ExecutionRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-platform-launcher/src/main/java/org/junit/platform/launcher/core/StreamInterceptingTestExecutionListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-platform-launcher/src/module/org.junit.platform.launcher/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-platform-suite-engine/src/main/java/org/junit/platform/suite/engine/SuiteEngineDescriptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-platform-suite-engine/src/module/org.junit.platform.suite.engine/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-vintage-engine/src/main/java/org/junit/vintage/engine/execution/RunListenerAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-vintage-engine/src/testFixtures/java/org/junit/vintage/engine/samples/junit4/IgnoredParameterizedTestCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/junit-vintage-engine/src/testFixtures/java/org/junit/vintage/engine/samples/junit4/ParameterizedTimingTestCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/platform-tests/src/test/java/org/junit/platform/commons/util/ReflectionUtilsTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/platform-tests/src/test/java/org/junit/platform/commons/util/classes/AVanillaEmpty.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/platform-tests/src/test/java/org/junit/platform/engine/discovery/PackageSelectorTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/platform-tests/src/test/java/org/junit/platform/launcher/TestPlanTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/platform-tests/src/test/java/org/junit/platform/launcher/core/LauncherConfigTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/platform-tests/src/test/java/org/junit/platform/reporting/legacy/xml/XmlReportDataTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/platform-tests/src/test/resources/modules-2500/foo.bar/FooBar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/junit5-r5.9.2/platform-tooling-support-tests/projects/maven-surefire-compatibility/src/test/java/com/example/project/DummyTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/docker/cors.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/docs/samples/webpack-getting-started/webpack.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/docs/usage/limitations.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/src/core/components/auth/authorize-btn.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/src/core/plugins/download-url.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/src/core/plugins/oas3/components/servers-container.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/src/style/_authorize.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/src/style/main.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-cypress/static/documents/bugs/4867.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-cypress/static/documents/bugs/6158.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-cypress/static/documents/features/syntax-highlighting-json-oas3.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-cypress/static/documents/features/try-it-out-enabled.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-cypress/tests/bugs/5138.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-cypress/tests/features/oas3-badge.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-cypress/tests/features/oas3-multiple-servers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-cypress/tests/features/parameter-array-missing-items.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-cypress/tests/features/request-body-upload-file.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-selenium/static/test-specs/callbacks.openapi.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/e2e-selenium/static/test-specs/refs/api1.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/unit/bugs/3279-empty-markdown-source.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/unit/components/version-pragma-filter.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../External JAR Files/swagger-ui-5.0.0-alpha.6/swagger-ui-5.0.0-alpha.6/test/unit/core/helpers/get-model-name.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-ecommerce-sts/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/src/main/java/com/aashish22bansal/ecommerce/SpringBootEcommerceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/src/main/java/com/aashish22bansal/ecommerce/entity/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/src/main/java/com/aashish22bansal/ecommerce/entity/ProductCategory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot-ecommerce-sts/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-ecommerce/src/test/java/com/aashish22bansal/ecommerce/SpringBootEcommerceApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2P6AxKI4RA74cQM3b9li3FSoMh2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/aashi/GitHub/My Repositories/E-Commerce-Application-Using-Angular-and-Java-Spring-Boot/Source Code/backend/spring-boot-ecommerce"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cab55173-71e8-4119-9f6d-74ac2a4a656c" name="Changes" comment="" />
+      <created>1682767404932</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682767404932</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
