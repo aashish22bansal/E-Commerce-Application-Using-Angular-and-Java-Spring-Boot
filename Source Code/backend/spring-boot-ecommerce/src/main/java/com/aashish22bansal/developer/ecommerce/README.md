@@ -43,3 +43,11 @@
         <li><b>StackOverFlow</b>: https://stackoverflow.com/questions/60651244/process-command-c-program-files-java-jdk-bin-java-exe-finished-with-non-zer</li>    
     </ul>
 </p>
+
+<h2>The requested resource [/api] is not available</h2>
+<p>
+    <ul>
+        <li><b>StackOverFlow</b>: https://stackoverflow.com/questions/70044728/how-to-resolve-the-requested-resource-is-not-available-error-in-spring-boot-whic</li>
+        <li>Add Framework Support for a Maven Project (using IntelliJ Idea). After creating the <code>pom.xml</code> file, add the related code from <a href="https://codezup.com/deploy-spring-boot-war-to-external-tomcat/">codezup.com</a></li>
+    </ul>
+</p>
