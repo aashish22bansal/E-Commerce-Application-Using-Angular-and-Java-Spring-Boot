@@ -1,0 +1,5 @@
+INDEX VERSION 1.132+C:\Users\aashi\GitHub\My Repositories\E-Commerce-Application-Using-Angular-and-Java-Spring-Boot\Source Code\.metadata\.plugins\org.eclipse.jdt.core
+32429830.index
+1095888839.index
+1865797976.index
+3413725848.index
