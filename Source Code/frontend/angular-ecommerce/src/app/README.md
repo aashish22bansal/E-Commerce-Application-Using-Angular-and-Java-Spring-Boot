@@ -1,0 +1,2 @@
+# Base Directory
+In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule</code>. This is the module which contains the <code>HttpClient</code>. For these, we will also need to provide the specific import statements manually. Also, in the <code>providers</code> section, we will need to add the <code>ProductService</code> service. This will allow us to inject the given service into other parts of our application.
