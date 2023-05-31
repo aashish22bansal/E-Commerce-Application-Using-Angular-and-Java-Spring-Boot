@@ -62,7 +62,7 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
                 ]
             </code></pre>
             <p>We must make sure that we place pages such as PageNotFoundComponent in the end because the order of the routes is important as the first match wins while traversing top down. So, we should start from specific to generic.</p>
-        </li>
+        </li> 
         <li>Configure the Router based on the routes.</li>
         <li>Define the Router Outlet.</li>
         <li>Set up Router Links to pass category ID Parameter.</li>
