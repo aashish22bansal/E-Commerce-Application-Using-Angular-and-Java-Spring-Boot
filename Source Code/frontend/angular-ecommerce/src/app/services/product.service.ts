@@ -21,10 +21,12 @@ export class ProductService {
    */
   getProductList(theCategoryId: number): Observable<Product[]>{
 
-    // @TODO: need to build URL based on Category ID
+    // Building the URL based on Category ID because Spring Data REST would automatically
+    // expose the endpoint.
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
 
-
-    return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
+    // So, we will return the searchUrl instead of the baseUrl
+    return this.httpClient.get<GetResponse>(searchUrl).pipe(
       map(response => response._embedded.products)
     );
   }
