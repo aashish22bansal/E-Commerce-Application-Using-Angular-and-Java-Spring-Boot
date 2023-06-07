@@ -14,7 +14,16 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getProductList(): Observable<Product[]>{
+  /**
+   * 
+   * @param theCategoryId 
+   * @returns the value of the currentCategoryId mapped for the getProductList() method
+   */
+  getProductList(theCategoryId: number): Observable<Product[]>{
+
+    // @TODO: need to build URL based on Category ID
+
+
     return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
       map(response => response._embedded.products)
     );
