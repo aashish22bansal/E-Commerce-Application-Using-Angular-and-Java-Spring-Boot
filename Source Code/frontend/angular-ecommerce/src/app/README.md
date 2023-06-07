@@ -198,3 +198,4 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
     </code></pre>
     <p>The Query Methods also have support for conditional: <code>AND</code>, <code>OR</code>, <code>LIKE</code>, <code>SORT</code>, etc.</p>
 </div>
+

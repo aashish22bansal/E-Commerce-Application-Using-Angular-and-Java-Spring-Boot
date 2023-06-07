@@ -10,7 +10,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { Product } from './common/product';
 
 /**
- * Defining the Routes.
+ * Step 1: Defining the Routes.
  */
 const routes: Routes = [
   {path: '', redirectTo: '/products', pathMatch: 'full'},
@@ -26,7 +26,7 @@ const routes: Routes = [
     ProductListComponent
   ],
   imports: [
-    RouterModule.forRoot(routes), // Providing the defined routes
+    RouterModule.forRoot(routes), // Step 2: Providing the defined routes
     BrowserModule,
     HttpClientModule
   ],

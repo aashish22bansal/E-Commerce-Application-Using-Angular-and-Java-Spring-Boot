@@ -1,5 +1,6 @@
 <div class="page wrapper">
     <!-- MENU SIDEBAR -->
+    <!-- Here, for Step 4, we will setup the Route Links to pass category ID param. Here, we will remove the href attributes and replace them with the router links. -->
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="#">
@@ -10,17 +11,17 @@
             <nav class="navbar-sidebar">
                 <ul class="list-unstyled navbar-list">
                     <li>
-                        <a href="#">Books</a>
+                        <a routerLink="/category/1" routerLinkActive="active-link">Books</a>
                     </li>
                     <li>
-                        <a href="#">Coffee Mugs</a>
+                        <a routerLink="/category/2" routerLinkActive="active-link">Coffee Mugs</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#">Mouse Pads</a>
                     </li>
                     <li>
                         <a href="#">Luggage Tags</a>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
         </div>
@@ -49,7 +50,9 @@
         </header>
 
         <!-- MAIN CONTENT  -->
-        <app-product-list></app-product-list>
+        <!-- Here, for Step 3, instead of using the app-product-list, we will use the router outlet. Router Outlet acts as a placeholder and renders the desired component based on route at the given location. We will use this inplace of app-product-list. -->
+        <!-- <app-product-list></app-product-list> -->
+        <router-outlet></router-outlet>
     </div>
 </div>
 
