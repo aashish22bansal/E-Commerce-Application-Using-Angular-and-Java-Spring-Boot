@@ -134,7 +134,50 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
             </ul>
             <p>The parameter value is returned as a <code>String</code>, so we can actually use the <code>+</code> symbol to convert the string to a <code>number</code>. <b>This is a TypeScript trick where we can add a <code>+</code> symbol at the beginning of the string which would convert the <code>String</code> into a <code>number</code></b>.</p>
         </li>
-        <li>Modify Spring Boot Application REST Repository to handle the new category ID.</li>
+        <li>
+            <b>Modify Spring Boot Application REST Repository to handle the new category ID</b>:
+            <p>Currently, the Spring Boot App returns the <code>product</code>(s) regardless of the <code>category</code>. We need to modify this to only return the products for a given category ID. Now, Spring Data REST and Spring Data JPA supports "query methods", so behind the scene, Spring Boot method will construct a query based on method naming conventions. For example, in the <code>ProductRepository</code> interface, we will add the following code:</p>
+            <pre><code>
+                public interface ProductRepository extends JpaRepository<Product, Long>{
+                    Page< Product > findByCategoryId(@Param("id") Long id, Pageable pageable);
+                }
+            </code></pre>
+            <p>Since the above method (<code>findByCategoryId()</code>) starts with <code>findBy</code>, hence this method is a <b>Query Method</b>, hence Spring will do special processing for this method. In this method, we have the following:</p>
+            <ul>
+                <li><b>A Query Method</b>: <code>findBy</code></li>
+                <li><b>Match by Parameter</b>: <code>CategoryId</code></li>
+                <li><b>Parameter Value</b>: <code>Long id</code></li>
+            </ul>
+            <p>So, behind the scenes, Spring will execute a query similar to this:</p>
+            <pre><code>
+                SELECT * 
+                FROM product
+                WHERE category_id=?;
+            </code></pre>
+            <p>So, Spring will actually look at that method name, parse that method name and then execute a query similar to the one above.</p>
+            <p>The <code>Page</code> and <code>Pageable</code> provides support for pagination. In the method above, <code>Page</code> is a sublist of a list of objects and <code>Pageable</code> represents pagination information, so it has the information such as which page number to go to, page size, the previous reference, the next reference and so on. And, all of these objects are created automatically behind the scenes, by the Spring Framework.</p>
+            <p>Spring Data REST will automatically expose the endpoints for the query methods. So, any method starts with <code>findBy</code>, <code>readBy</code>, <code>queryBy</code>, etc. would be available under the <code>/search</code> or the query name.</p>
+        </li>
         <li>Update the Angular Service to call new URL on Spring Boot Application.</li>
     </ol>
+</div>
+
+## More on Query Methods
+<div>
+    <p>We can also provide our own custom query using <code>@Query</code> annotation and provide our own query, for example, </p>
+    <pre><code>
+        @Query(
+        "
+            SELECT p 
+            FROM Product p
+            WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :searchText, '%'))
+        "
+        +
+        "
+            OR LOWER(p.description) LIKE LOWER(CONCAT('%', :searchText, '%'))
+        "
+        )
+        Page< Product > performCustomFunction(@Param("searchText") String searchText, Pageable pageable);
+    </code></pre>
+    <p>The Query Methods also have support for conditional: <code>AND</code>, <code>OR</code>, <code>LIKE</code>, <code>SORT</code>, etc.</p>
 </div>
