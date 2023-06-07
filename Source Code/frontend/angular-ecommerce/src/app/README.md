@@ -157,8 +157,25 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
             <p>So, Spring will actually look at that method name, parse that method name and then execute a query similar to the one above.</p>
             <p>The <code>Page</code> and <code>Pageable</code> provides support for pagination. In the method above, <code>Page</code> is a sublist of a list of objects and <code>Pageable</code> represents pagination information, so it has the information such as which page number to go to, page size, the previous reference, the next reference and so on. And, all of these objects are created automatically behind the scenes, by the Spring Framework.</p>
             <p>Spring Data REST will automatically expose the endpoints for the query methods. So, any method starts with <code>findBy</code>, <code>readBy</code>, <code>queryBy</code>, etc. would be available under the <code>/search</code> or the query name.</p>
+            <p>Now, we also need to pass some data using the given REST API. For this, we will simply use, <code>?id=< ID_NUMBER ></code>.</p>
         </li>
-        <li>Update the Angular Service to call new URL on Spring Boot Application.</li>
+        <li>
+            <b>Update the Angular Service to call new URL on Spring Boot Application</b>:
+            <p>Now, we have the <code>ProductService</code> as:</p>
+            <pre><code>
+                export class ProductService{
+                    private baseUrl = 'http://localhost:8080/api/products';
+                    constructor(private httpClient: HttpClient){   }
+                    getProductList(theCategoryId: number): Observable< Product[] >{
+                        const url = '${this.baseUrl}/search/findByCategoryId?=${theCategoryId}';
+                        return this.httpClient.get< GetResponse >(url).pipe(
+                            map(response => response._embedded.products)
+                        );
+                    }
+                }
+            </code></pre>
+            <p>In the above method, we have a base URL, we have the method <code>getProductList()</code> to which we add this new parameter (the category ID) and then we simply set a reference URL (<code>/search/findByCategoryId</code>) and we simply associate or append the category ID that was passed into this given method based on the parameter that we pass to this given angular method in our product service.</p>
+        </li>
     </ol>
 </div>
 
