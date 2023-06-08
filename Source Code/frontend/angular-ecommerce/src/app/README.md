@@ -253,10 +253,65 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
             <p>Now, in our configuration, the above method (<code>configureRepositoryRestConfiguration</code>), we are going to call an internal helper method called <code>exposeIds()</code>, and we will pass in the <code>config</code>. In this, we will get a collection of all Entity Classes from the Entity Manager and then we will create an array list of those entity types. Next, we will get the Entity Types for the Entities. Then, for each of the <code>EntityType</code>, we will obtain the Java Type (using <code>getJavaType()</code>), and then add that to our Entity Classes. Finally, we will expose the Entity IDs for the collection of Entity Domain Types. So, we will take that collection of Entity Classes and convert it to Array (giving us an array of classes or domain types), then we will use <code>config.exposeIdsFor(domainTypes)</code>, to obtain the desired output.</p>
             <p>So, once we run the application, we will have the Entity ID at the <code>ProductCategory</code> level.</p>
         </li>
-        <li>Create a class <code>ProductCategory</code></li>
-        <li>Create a new component for our menu</li>
-        <li>Enhance our menu component to read data from product service</li>
-        <li>Update Product Service to call URL on Spring Boot App</li>
-        <li>In HTML, replace the hard-coded links with the new menu component.</li>
+        <li>
+            <p><b>Create a class <code>ProductCategory</code></b>: We will create this class in the Angular Application using the following command:</p>
+            <pre><code>ng generate class common/product-category</code></pre>
+            <p>This will give us an empty file to which we will add the following properties (<code>id</code> and <code>categoryName</code>) as:</p>
+            <pre><code>
+                export class ProductCategory{
+                    constructor(public id: number, public categoryName: string){
+                        //code
+                    }
+                }
+            </code></pre>
+        </li>
+        <li>
+            <p><b>Create a new component for our menu</b>: In this, we will encapsulate the categories we have in the menu as a Menu Component. So, we can generate this component using the following command: </p>
+            <pre><code>ng generate component components/product-category-menu</code></pre>
+        </li>
+        <li>
+            <p><b>Enhance our menu component to read data from product service</b>: In order to achieve this, we will create the property <code>productCategories</code> in the <code>ProductCategoryMenuComponent</code> as:</p>
+            <pre><code>
+                export class ProductCategoryMenuComponent implements OnInit{
+                    productCategories: ProductCategories[] = [];
+                    constructor(private productService: ProductService){  }
+                    ngOnInit(){
+                        this.listProductCategories();
+                    }
+                    listProductCategories(){
+                        this.productService.getProductCategories().subscribe(
+                            data => {
+                                console.log('Product Categories: ' + JSON.stringify(data));
+                                this.productCategories = data;
+                            }
+                        )
+                    }
+                }
+            </code></pre>
+            <p>In the above code, <code>productCategories</code> is an array of Product Category Items. We inject our <code>productService</code> into this component and we <code>subscribe()</code> to our <code>listProductCategories()</code> obtained from <code>productCategories</code>. Here, we are simply logging the data returned from the service and then assigning the data to our property. So, we are obtaining the information from our service and we are assigning it.</p>
+        </li>
+        <li>
+            <p><b>Update Product Service to call URL on Spring Boot App</b>: We can achieve this with the following code:</p>
+            <pre><code>
+                export class ProductService{
+                    private categoryUrl = 'http://localhost:8080/api/product-category';
+                    // code
+                    getProductCategories(): Observable< ProductCategory[] >{
+                        return this.httpClient.get< GetResponseProductCategory >(this.categoryUrl).pipe(
+                            map(response => response._embedded.productCategory)
+                        );
+                    }
+                }
+                interface GetResponseProductCategory{
+                    _embedded: {
+                        productCategory: ProductCategory[];
+                    }
+                }
+            </code></pre>
+            <p>In the above code, we can see that we have the <code>categoryUrl</code> for the REST API. We call that REST API using the <code>get()</code> method which returns an Observable and we simply map the JSON Data from the Spring Data REST to our <code>productCategory</code> array. Then, we will use the <code>GetResponseProductCategory</code> interface where we unwrap the JSON from the Spring Data REST <code>_embedded</code> entry.</p>
+        </li>
+        <li>
+            <p><b>In HTML, replace the hard-coded links with the new menu component</b>: We will remove the hard-coded part and use our <code>app-product-category-menu</code> component. So, we will use our selector here for our new component.We will just loop over the <code>productCategories</code> and build the links dynamically to which we will add the Category ID and display the Category Name.</p>
+        </li>
     </ol>
 </div>
