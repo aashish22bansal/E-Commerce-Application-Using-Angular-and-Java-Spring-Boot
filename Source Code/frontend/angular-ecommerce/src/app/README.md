@@ -199,3 +199,64 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
     <p>The Query Methods also have support for conditional: <code>AND</code>, <code>OR</code>, <code>LIKE</code>, <code>SORT</code>, etc.</p>
 </div>
 
+## Search By Category
+<div>Until now, we had kept the Names and IDs of our Categories as static by hardcoding them. We can enhance the application to read the Categories from the database via a REST API.</div>
+<div>
+    <p>So, we have the development process as:</p>
+    <ol>
+        <li>
+            <p><b>Modify Spring Boot Application - Expose Entity IDs</b>: By Default, Spring Data REST does not expose Entity IDs. We need the Entity IDs for a number of use cases, for example, obtaining a list of Product Categories by ID, create a Master/detailed View to get a Product by ID.</p>
+            <p>Now, if we look at the response from the REST API, then we will see that there is no Entity ID at the <code>ProductCategory</code> level. But if we were to look at the <b>HATEOS Level</b>, then we can see that there is an Entity ID. But this comes with a problem which is that there is no easy access as it requires parsing the URL String which is not an ideal approach. An ideal approach for this is that we need to have the response from the REST API to actually include the Entity ID at the <code>ProductCategory</code> level. So, we will have the Category ID and also the Category Name which is what we need for Easy Access.</p>
+            <p>So, we need to update the Spring Data REST config to expose the Entity IDs. We can use the following procedure for this:</p>
+            <ul>
+                <li>Get a List of all Entity classes from the Entity Manager.</li>
+                <li>Create an array of Entity Types</li>
+                <li>Get the Entity Types for each of the Entities</li>
+                <li>Expose the entity IDs for the Array of Entity/Domain Types.</li>
+            </ul>
+            <p>We can update the Spring Data REST Config to expose Entity IDs as:</p>
+            <pre><code>
+                @Configuration
+                public class MyDataRestConfig implements RepositoryRestConfigurer{
+                    private EntityManager entityManager;
+                    @Autowired
+                    public MyDataRestConfig(EntityManager theEntityManager){
+                        entityManager = theEntityManager;
+                    }
+                    //code
+                }
+            </code></pre>
+            <p>So, in <code>MyDataRestConfig</code>, we need to auto-wire the JPA Entity Manager, effectively inject the Entity Manager. In the above code, we can see that we are using the constructor injection to inject the JPA Entity Manager.</p>
+            <pre><code>
+                @Override
+                public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config){
+                    //code 
+                    // call an internal helper method
+                    exposeIds(config);
+                }
+                private void exposeIds(RepositoryRestConfiguration config){
+                    // expose Entity IDs
+                    // code
+                    // 1. Gets a list of all entity classes from the entity manager.
+                    Set< EntityType< ? > > entities = entityManager.getMetamodel().getEntities();
+                    // 2. Create an array of Entity Types
+                    List< Class > entityClasses = new ArrayList<>();
+                    // 3. Get the Entity types for the entities
+                    for(EntityType tempEntityType: entities){
+                        entityClasses.add(tempEntityType.getJavaType());
+                    }
+                    // 4. Expose the Entity IDs for the array of Entity/Domain Types
+                    Class[] domainTypes = entityClasses.toArray(new Class[0]);
+                    config.exposeIdsFor(domainTypes);
+                }
+            </code></pre>
+            <p>Now, in our configuration, the above method (<code>configureRepositoryRestConfiguration</code>), we are going to call an internal helper method called <code>exposeIds()</code>, and we will pass in the <code>config</code>. In this, we will get a collection of all Entity Classes from the Entity Manager and then we will create an array list of those entity types. Next, we will get the Entity Types for the Entities. Then, for each of the <code>EntityType</code>, we will obtain the Java Type (using <code>getJavaType()</code>), and then add that to our Entity Classes. Finally, we will expose the Entity IDs for the collection of Entity Domain Types. So, we will take that collection of Entity Classes and convert it to Array (giving us an array of classes or domain types), then we will use <code>config.exposeIdsFor(domainTypes)</code>, to obtain the desired output.</p>
+            <p>So, once we run the application, we will have the Entity ID at the <code>ProductCategory</code> level.</p>
+        </li>
+        <li>Create a class <code>ProductCategory</code></li>
+        <li>Create a new component for our menu</li>
+        <li>Enhance our menu component to read data from product service</li>
+        <li>Update Product Service to call URL on Spring Boot App</li>
+        <li>In HTML, replace the hard-coded links with the new menu component.</li>
+    </ol>
+</div>
