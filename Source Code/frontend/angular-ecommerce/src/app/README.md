@@ -367,3 +367,62 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
         </li>
     </ol>
 </div>
+
+## Event Binding
+<div>
+    <p>In our application, in order to search for a Product, the user will enter the information in the search field and then click on the "Search" button. So, when the user clicks the button, we should be able to read the provided input and perform operations on it or use it. So, we will take that Text Data and pass it to the REST API for performing the search and this can be done with the help of Event Binding.</p>
+    <p>In Angular, we can listen to the events with the help of Event Binding (which is also known as Event Handling), for example,</p>
+    <pre><code>
+        < button {click}="doMyCustomWork()" >Search< /button >
+    </code></pre>
+    <p>So, from the above button, we want to listen for a <b>"click"</b> event so that we can trigger an Event Handler. This is basically a method in our Angular Component Code and it can be any method name that we define. So, we can have the custom method as:</p>
+    <pre><code>
+        doMyCustomWork(){
+            console.log("Custom Work");
+        }
+    </code></pre>
+</div>
+
+## Reading User Input
+<div>
+    <p>Suppose we have the following button:</p>
+    <pre><code>
+        < input #myInput type="text" {keyup.enter}="doMyCustomWork(myInput.value)" />
+    </code></pre>
+    <p>Now, in this input text field, we will listen for the "<b>enter</b>" key, so when the user hits the enter key, then we will call the <code>doMyCustomWork()</code> method. Along with this, we will use the <code>#</code> symbol which acts as a Template Reference Variable for <code>myInput</code> which would give access to the element and then we have the method within the Component perform the Custom Operation. In this, <code>myInput.value</code> gives the actual value that the user typed which would be passed to the custom method as a String.</p>
+    <p>Extending this, we can add a Search button as:</p>
+    <pre><code>
+        < input #myInput type="text" {keyup.enter}="doMyCustomWork(myInput.value)" />
+        < button {click}="doMyCustomWork(myInput.value)" >Search< /button >
+    </code></pre>
+    <p>Using the button, we will listen for a click event, and then we will call the method to perform the custom operation as:</p>
+    <pre><code>
+        doMyCustomWork(providedInput: string){
+            console.log("Custom Work");
+        }
+    </code></pre>
+    <p>With this, whether the user hits the search button or the enter key, the same method would be triggered.</p>
+</div>
+
+## Other Events
+<div>
+    <p>Some of the other events which we can use are:</p>
+    <ul>
+        <li>
+            <b><code>focus</code></b>: An element has received focus.
+        </li>
+        <li>
+            <b><code>blur</code></b>: An element has lost focus.
+        </li>
+        <li>
+            <b><code>keyup</code></b>: Any key is released. For a specifc key, the enter key, use: <code>keyup.<b>enter</b></code>.
+        </li>
+        <li>
+            <b><code>keydown</code></b>: Any key is pressed.
+        </li>
+        <li>
+            <b><code>dblclick</code></b>: The mouse is clicked twice on an element.
+        </li>
+    </ul>
+    <p>More Events: <a href="https://developer.mozilla.org/en-US/docs/Web/Events">https://developer.mozilla.org/en-US/docs/Web/Events</a>.</p>
+</div>
