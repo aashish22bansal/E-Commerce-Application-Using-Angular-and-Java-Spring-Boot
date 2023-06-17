@@ -1,0 +1,3 @@
+# Component - Product Category Menu
+<p>In this component, we will define the property named, <code>productCategories</code>, which is an Array of <code>ProductCategory</code> items. Then, within the <code>constructor()</code>, we will inject the Component Service. Then, in the <code>ngOnInit()</code> method, we will call the <code>listProductCategories()</code> method add define it.</p>
+<p>In the <code>listProductCategories()</code> method, we will first invoke the service in which we will obtain the Product Categories and then we will assign the obtained values to our Property.</p>

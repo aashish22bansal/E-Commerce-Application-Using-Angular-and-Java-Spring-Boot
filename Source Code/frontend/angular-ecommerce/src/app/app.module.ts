@@ -8,6 +8,7 @@ import { ProductService } from './services/product.service';
 
 import { Routes, RouterModule } from '@angular/router';
 import { Product } from './common/product';
+import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 
 /**
  * Step 1: Defining the Routes.
@@ -23,7 +24,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductCategoryMenuComponent
   ],
   imports: [
     RouterModule.forRoot(routes), // Step 2: Providing the defined routes
