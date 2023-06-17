@@ -315,3 +315,55 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
         </li>
     </ol>
 </div>
+
+## Search for Products by Keyword
+<div>
+    <p>We would search for the required Product in the Search Bar with the help of some keywords. The Development Process for this Search is:</p>
+    <ol>
+        <li>
+            <b>Modify Spring Boot App to add a new Search Method</b>: 
+            <p>The Spring Data REST and Spring Data JPA supports "Query Methods", so Spring will construct a Query based on method-naming conventions. So, we have the <code>ProductRepository</code> as:</p>
+            <pre><code>
+                public interface ProductRepository extends JpaRepository< Product, Long >{
+                    Page< Product > findByNameContaining(@Param("name") String name, Pageable pageable);
+                    // Logic
+                }
+            </code></pre>
+            <p>So, we will add the new method named <code>findByNameContaining()</code> to which we will pass the actual name.</p>
+            <p>Now, we need to find the Products based on name, so we would need to use a special Query Method, in this case, the method contains the keyword <b>"Containing"</b> which is similar to <b>LIKE</b> (in SQL). So, behind the scenes, Spring would actually execute a query as:</p>
+            <pre><code>
+                SELECT * 
+                FROM Product p
+                WHERE p.name LIKE CONCAT('%', :name, '%');
+            </code></pre> 
+            <p>Here, <code>name</code> is the actual name which is being passed as a parameter.</p>
+            <p>This search would happen under the following URL:</p>
+            <center>http://localhost:8080/api/products/search/findByNameContaining?name=< NAME_OF_THE_PRODUCT ></center>
+            <p>This is a method of passing the name to the REST API.</p>
+        </li>
+        <li>
+            <b>Create a new Component for Search</b>: 
+            <p>For this, we will create a new Component using the command:</p>
+            <pre><code>ng generate component components/search</code></pre>
+            <p>We would also need to add a new route for searching as:</p>
+            <pre><code>
+                ...
+                {path: 'search/:keyword', component: ProductListComponent},
+                ...
+            </code></pre>
+            <p>This path would be set in the <code>app.module.ts</code> file.</p>
+        </li>
+        <li>
+            <b>Add new Angular Route for Searching</b>: 
+        </li>
+        <li>
+            <b>Update Search Component to send data to Search Route</b>: 
+        </li>
+        <li>
+            <b>Enhance <code>ProductListComponent</code> to search for products with <code>ProductService</code></b>: 
+        </li>
+        <li>
+            <b>Update <code>ProductService</code> to call URL on Spring Boot App</b>: 
+        </li>
+    </ol>
+</div>
