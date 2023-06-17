@@ -84,7 +84,7 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
             </code></pre>
             <p>So, from the above code, we can see that we have a new entry in the import section:</p>
             <pre><code>RouterModule.forRoot(routes)</code></pre>
-            <p>To this import, we will give the routes. These routes are defined earlier as a constant (in the above code, using <pre><code>routes</code></pre>). Using this, the application will know about the routes which we have setup.</p>
+            <>To this import, we will give the routes. These routes are defined earlier as a constant (in the above code, using <code>routes</code>). Using this, the application will know about the routes which we have setup.</p>
         </li>
         <li><b>Define the Router Outlet</b>: 
             <p>The <b>Router Outlet</b> acts as the placeholder as it renders the desired component based on route. So, in our application, we have our menu items on the left from which we select the link and then the router outlet is actually the place where the router component would be rendered. It updates only a single section of the page and it does not reload the entire page. For this, we will update the <code>app.component.html</code> to use the Router Outlet as:</p>
