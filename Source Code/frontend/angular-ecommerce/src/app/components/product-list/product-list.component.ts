@@ -15,6 +15,9 @@ export class ProductListComponent implements OnInit{
   // Adding a property for currentCategoryId
   currentCategoryId: number = 1;
 
+  // Search Mode
+  searchMode: boolean = false;
+
   /**
    * 
    * @param productService 
@@ -39,6 +42,43 @@ export class ProductListComponent implements OnInit{
   }
 
   /**
+   * REFACTORING CODE
+   * In this method, we will call the search methods according to the Search Mode.
+   * So, we will first check if this Route has a Parameter for "keyword" because if it does 
+   * have a keyword parameter, then it means we are performing a search (the "keyword" parameter
+   *  comes from the "route" configuration that we had setup earlier and also from the 
+   * "SearchComponent" when the user enters the search data to navigate to the URL).
+   */
+  listProducts(){
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+
+    if(this.searchMode){
+      this.handleSearchProducts();
+    }
+    else{
+      this.handleListProducts();
+    }
+  }
+
+  /**
+   * Adding new method called handleSearchProducts().
+   * In this, we first need to obtain the actual keyword ("theKeyword") that the user passed in,
+   * basically reading a parameter. Then, we will search for products using that given 
+   * keyword.
+   */
+  handleSearchProducts(){
+    const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!; // Note the Exclamation Mark.
+
+    // Search for Products using theKeyword
+    this.productService.searchProducts(theKeyword).subscribe(
+      data => {
+        this.products = data;
+      }
+    );
+  }
+
+  /**
+   * Adding new method called handleListProducts().
    * Here, we will check if the "id" parameter is available just to know if we can use 
    * that value or if we need to use the default value.
    * We will first check if there is a value being passed or not. If there is a value 
@@ -51,7 +91,7 @@ export class ProductListComponent implements OnInit{
    * we will pass the this.currentCategoryId to the getProductList() method which is mapped
    * to product.service.ts file.
    */
-  listProducts(){
+  handleListProducts(){
     // obtaining the passed value
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id'); // This will return true if the parameter is available.
 
