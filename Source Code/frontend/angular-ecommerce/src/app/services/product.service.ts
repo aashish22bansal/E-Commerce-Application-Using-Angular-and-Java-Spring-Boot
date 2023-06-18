@@ -9,6 +9,7 @@ import { ProductCategory } from '../common/product-category';
   providedIn: 'root'
 })
 export class ProductService {
+  
 
   // defining the Base URL for the Spring Boot REST API
   private baseUrl = 'http://localhost:8080/api/products';
@@ -49,6 +50,14 @@ export class ProductService {
     return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
       map(response => response._embedded.products)
     );
+  }
+
+  getProduct(theProductId: number): Observable<Product> {
+    // Build URL based on Product ID
+    const productUrl = `${this.baseUrl}/${theProductId}`;
+
+    // Performing Search
+    return this.httpClient.get<Product>(productUrl);
   }
 
   getProductCategories(): Observable<ProductCategory[]> {
