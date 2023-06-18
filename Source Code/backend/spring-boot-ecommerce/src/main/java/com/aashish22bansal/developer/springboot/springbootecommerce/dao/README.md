@@ -7,6 +7,18 @@
     <li>Entity Type (which happens to be <code>Product</code> in this case)</li>
     <li>Primary Key Data Type (which happens to be <code>Long</code> in this)</li>
 </ol>
+<p>Here, we will also create the Query Methods which would be used to searching in the Spring Boot Application:</p>
+<ul>
+    <li><code>findByCategoryId</code></li>
+    <li>
+        <code>findByNameContaining</code>: This Query Method would function like a SQL Query:
+        <pre><code>
+            SELECT *
+            FROM Product p
+            WHERE p.name LIKE CONCAT('%', :name, '%');
+        </code></pre>
+    </li>
+</ul>
 
 ## <code>ProductCategoryRepository</code> Interface
 <p>In this Interface, we will make use of the Spring Data JPA and extend the interface with it. For this, we will specify two entity types:</p>
