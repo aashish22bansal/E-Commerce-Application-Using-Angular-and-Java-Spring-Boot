@@ -10,7 +10,6 @@ import { ProductCategory } from '../common/product-category';
 })
 export class ProductService {
 
-
   // defining the Base URL for the Spring Boot REST API
   private baseUrl = 'http://localhost:8080/api/products';
   private categoryUrl = 'http://localhost:8080/api/product-category';
@@ -28,8 +27,25 @@ export class ProductService {
     // expose the endpoint.
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
     
-
+    console.log("within getProducts()");
     // So, we will return the searchUrl instead of the baseUrl
+    return this.getProducts(searchUrl); // Refactored the code
+  }
+
+  /**
+   * Query Method
+   * @param theKeyword: It is provided by the user.
+   */
+  searchProducts(theKeyword: string): Observable<Product[]> {
+    // Building the URL based on "theKeyword" because Spring Data REST would automatically
+    // expose the endpoint.
+    const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;
+    console.log("within searchProducts()");
+    // So, we will return the searchUrl instead of the baseUrl
+    return this.getProducts(searchUrl);
+  }
+
+  private getProducts(searchUrl: string): Observable<Product[]> {
     return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
       map(response => response._embedded.products)
     );
@@ -40,6 +56,7 @@ export class ProductService {
       map(response => response._embedded.productCategory)
     );
   }
+  
 }
 
 interface GetResponseProducts{
