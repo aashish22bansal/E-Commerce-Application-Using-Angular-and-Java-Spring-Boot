@@ -489,3 +489,97 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
     </ul>
     <p>More Events: <a href="https://developer.mozilla.org/en-US/docs/Web/Events">https://developer.mozilla.org/en-US/docs/Web/Events</a>.</p>
 </div>
+
+# Product Master-Detail View
+<div>
+    <p>We need to create a View using which the Products Details should be presented to the user. The Development Process for this is:</p>
+    <ol>
+        <li>
+            <b>Create a new Component for Product Details</b>: 
+            <p>We will create the new Component using the following command:</p>
+            <pre><code>ng generate component components/ProductDetails</code></pre>
+        </li>
+        <li>
+            <b>Add new Angular Route for Product Details</b>: 
+            <p>We can add the new Angular Route as:</p>
+            <pre><code>
+                ...
+                {path: 'products/:id', component: ProductDetailsComponent},
+                ...
+            </code></pre>
+            <p>Here, <code>:id</code> is the Parameter and the Component is the <code>ProductDetailsComponent</code>.</p>
+        </li>
+        <li>
+            <b>Add Router Links to the <code>product-list-grid.component.html</code> HTML Page</b>: 
+            <p>So, when the user clicks on the Product, then we should be able to show the details for which we will add a link to the Product Image and the Product Name. We can program this as:</p>
+            <pre><code>
+                < div *ngFor="let tempProduct of products" class="col-md-3" >
+                    < div class="product-box" >
+                        < a routerLink="/products/{{ tempProduct.id }}">
+                            < img src="{{ tempProduct.imageUrl }}" class="img-responsive" />
+                        < /a >
+                        < a routerLink="/products/{{ tempProduct.id }}">
+                            < h1 >{{ tempProduct.name }}< /h1 >
+                        < /a >
+                        ...
+                    < /div >
+                < /div >
+            </code></pre>
+            <p>In this, we will pass the parameter value which is stored in <code>:id</code>.</p>
+        </li>
+        <li>
+            <b>Enhance <code>ProductDetailsComponent</code> to retrieve from <code>ProductService</code></b>: 
+            <p>In this, we will first get the <code>id</code> from the <code>param</code> string as set in the route (using <code>id</code>) and convert a String to a Number. Then, we will retrieve the product from the <code>ProductService</code> using the <code>getProduct()</code> method as:</p>
+            <pre><code>
+                ...
+                // Get the "id" param string. Convert the string to a number using the "+" symbol
+                const theProductId: number = +this.route.snapshot.paramMap.get('id')!;
+                this.productService.getProduct(theProductId).subscribe(
+                    data => {
+                        this.product = data;
+                    }
+                )
+                ...
+            </code></pre>
+        </li>
+        <li>
+            <b>Update <code>ProductService</code> to call URL on Spring Boot App</b>: 
+            <p>We have the <code>ProductService</code> as:</p>
+            <pre><code>
+                getProduct(theProductId: number): Observable< Product >{
+                    // need to build URL based-on Product ID
+                    const productUrl = `${this.baseUrl}/${theProductId}`;
+                    return this.httpClient.get< Product >(productUrl);
+                }
+            </code></pre>
+            <p>Here, we make a call of the REST API using the <code>productUrl</code> which returns an <code>Observable</code> using which we will directly convert the returned JSON Data to <code>Product</code> object. So, there is no need to unwrap the JSON Data from Spring Data REST because there is no <code>_embedded</code> entry. The JSON Properties map directly to properties in <code>Product</code> class.</p>
+        </li>
+        <li>
+            <b>Update the HTML Page for <code>ProductDetailsComponent</code> to display Product Details</b>: 
+            <p>In the details page, we will provide:</p>
+            <ul>
+                <li>Image of the Product</li>
+                <li>Name of the Product</li>
+                <li>Price of the Product</li>
+                <li>Description of the Product</li>
+                <li>Cart Button</li>
+                <li>Navigation Link to go back to the Main Product List</li>
+            </ul>
+            <p>We can program this as:</p>
+            <pre><code>
+                < div class="detail-section" >
+                    < div class="container-fluid" >
+                        < img src="{{ product.imageUrl }}" class="detail-img" />
+                        < h3 >{{ product.name }}< /h3 >
+                        < div class="price" >{{ product.unitPrice | currency:'USD' }}< /div >
+                        < a href="#" class="primary-btn" >Add to Cart< /a >
+                        < hr >
+                        < h4 >Description< /h4 >
+                        < p >{{ product.description }}< /p >
+                        < a routerLink="/products" class="mt-5" >Back to Product List< /a >
+                    < /div >
+                < /div >
+            </code></pre>
+        </li>
+    </ol>
+</div>
