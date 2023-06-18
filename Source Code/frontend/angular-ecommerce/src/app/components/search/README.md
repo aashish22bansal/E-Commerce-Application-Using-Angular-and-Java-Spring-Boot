@@ -1,0 +1,6 @@
+# Search Component
+<div>
+    <p>In this, in the HTML Part, we will not use the <code>form</code> element and instead we will simply use the <code>div</code> element. We would also remove <code>onsubmit</code>, <code>name</code> and <code>method</code> tags and use the Event Binding in its place. After this, we will add the Template Reference Variable <code>#myInput</code> and also add the Event Handler. So, using this, we will be listening for an event and then call the method in the Angular Code to which we pass the input provided by the user.</p>
+    <p>In the <code>button</code> element, we will remove the <code>type</code> element and add our Event Binding to monitor the clicks.</p>
+    <p>In the TypeScript code, We will first inject the Router into our Component and then create the <code>doSearch()</code> method to which we will pass the input given by the user. In the method, we will navigate to the specific URL and search for products using the Spring Boot App. So, we route the data to the <code>search</code> route which would be handled by the <code>ProductListComponent</code>.</p>
+</div>
