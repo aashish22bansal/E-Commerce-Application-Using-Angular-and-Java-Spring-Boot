@@ -345,6 +345,9 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
             <b>Create a new Component for Search</b>: 
             <p>For this, we will create a new Component using the command:</p>
             <pre><code>ng generate component components/search</code></pre>
+        </li>
+        <li>
+            <b>Add new Angular Route for Searching</b>: 
             <p>We would also need to add a new route for searching as:</p>
             <pre><code>
                 ...
@@ -354,16 +357,76 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
             <p>This path would be set in the <code>app.module.ts</code> file.</p>
         </li>
         <li>
-            <b>Add new Angular Route for Searching</b>: 
-        </li>
-        <li>
             <b>Update Search Component to send data to Search Route</b>: 
+            <p>We will need to send the data to the search route so that,</p>
+            <ol>
+                <li>Users can enter Search Text</li>
+                <li>Click the Search Button</li>
+                <li><code>SearchComponent</code> has a click handler method</li>
+                <li>Read the Search Text</li>
+                <li>Route the data to the "<b>search</b>" route</li>
+                <li>Handled by the <code>ProductListComponent</code></li>
+            </ol>
+            <p>Now, this is being handled by the <code>ProductListComponent</code> because we want to reuse the logic and view for listing products (which would prevent us from reinventing the wheel).</p>
+            <p>We have the HTML component as:</p>
+            <pre><code>
+                < div >
+                    < input #myInput 
+                            type="text"
+                            placeholder="Search for products..."
+                            class="au-iinput au-input-xl"
+                            {keyup.enter}="doSearch(myInput.value)"
+                    />
+                    < button 
+                             {click}="doSearch(myInput.value)"
+                             class="au-btn-submit" >
+                        Search
+                    < /button >
+                < /div >
+            </code></pre>
+            <p>The Template Reference Variable (<code>#myInput</code>) provides access to the element and the button click triggers the execution of the method: </p>
+            <pre><code>
+                doSearch(value: string){
+                    console.log(`value=${value}`);
+                    this.router.navigateByUrl(`/search/$(value)`);
+                }
+            </code></pre>
+            <p>This element maps to the HTML Page to which we pass the value. This method navigates the required URL using the route and would be handled by the <code>ProductListComponent</code> to which we will pass the search data.</p>
         </li>
         <li>
             <b>Enhance <code>ProductListComponent</code> to search for products with <code>ProductService</code></b>: 
+            <p>We have the following code in the <code>product-list.component.ts</code> file:</p>
+            <pre><code>
+                ...
+                const theKeyword: string = this.route.snapshot.paramMap.get('keyword');
+                // now search for the products using keyword
+                this.productService.searchProducts(theKeyword).subscribe(
+                    data => {
+                        this.products = data;
+                    }
+                )
+                ...
+            </code></pre>
+            <p>Here, we actually read the keyword (which comes in as a parameter) based on our route configuration which is passed in from the <code>SearchComponent</code>. Using this, we will call the <code>searchProducts()</code> method using the keyword(s).</p>
         </li>
         <li>
             <b>Update <code>ProductService</code> to call URL on Spring Boot App</b>: 
+            <p>So, we have the <code>product.service.ts</code> file as:</p>
+            <pre><code>
+                ...
+                searchProducts(theKeyword: string): Observable< Product[] >{
+                    // need to build URL based on the keyword
+                    const searchUrl = `&{this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;
+                    return this.httpClient.get< GetResponseProducts >(searchUrl).pipe(map(response => response._embedded.products))
+                }
+                ...
+                interface GetResponseProducts{
+                    _embedded: {
+                        products: Products[];
+                    }
+                }
+            </code></pre>
+            <p>Using the above code, we create the URL to search for products by plugging in the parameters passed. Then, we will call the REST API which would return an Observable using which we will map the JSON Data from the Spring Data REST to <code>Product[]</code> Array and then we simply unwrap the JSON Data from Spring Data REST using the <code>_embedded</code> entry.</p>
         </li>
     </ol>
 </div>
