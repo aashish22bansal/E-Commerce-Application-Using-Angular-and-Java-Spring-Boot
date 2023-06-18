@@ -7,3 +7,13 @@
 <div>
     <p>In this method, we will call the search methods according to the Search Mode. So, we will first check if this Route has a Parameter for <code>keyword</code> because if it does have a <code>keyword</code> parameter, then it means we are performing a search (the <code>keyword</code> parameter comes from the <code>route</code> configuration that we had setup earlier and also from the <code>SearchComponent</code> when the user enters the search data to navigate to the URL). </p>
 </div>
+
+## If Incorrect Input is provided
+<div>
+    <p>We will use the <code>role</code> attribute within the <code>div</code> element which is used to provide <b>Accessibility</b>. It provides extra information to assistive technologies such as Screen Readers (for visually impared). Within this <code>div</code> element, we would provide the message which we want to display.</p>
+    <p>In this, while using the <code>*ngIf</code>, we used the <code>?</code> within the condition for <b>Safe Navigation</b> and this operator here is known as the <b>Safe Navigation Operator (?)</b>. It guards against null and undefined values in Property Paths (and provides a way to avoid null pointer issues). So, we can write the Algorithm as:</p>
+    <pre><code>
+        if(products is null/undefined) or (products.length == 0)
+            display: "No products found."
+    </code></pre>
+</div>
