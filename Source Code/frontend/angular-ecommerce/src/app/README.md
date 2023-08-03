@@ -828,7 +828,58 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
         </li>
         <li>
             <b>Enhance the HTML Template to use <code>ng-bootstrap</code> pagination component</b>: 
-            <p></p>
+            <p>Here, we will add support to the Template File to support Pagination. We can include the template in the pagination file as:</p>
+            <pre><code>
+                < div class="footer-pagination" >
+                    ...
+                    < ngb-pagination [(page)]="thePageNumber"
+                                     [pageSize]="thePageSize"
+                                     [collectionSize]="theTotalElements"
+                                     (pageChange)="listProducts()" >
+                    < /ngb-pagination >
+                    ...
+                < /div >
+            </code></pre>
+            <p>We can see that we are passing the parameters. Here, the component will generate the links for Pagination the part of each parameter is:</p>
+            <ol>
+                <li>
+                    <b><code>[(page)]="thePageNumber"</code></b>: 
+                    <p>It is a two-way data-binding between HTML Template and the <code>ProductListComponent</code>. </p>
+                    <p>On the LHS, the parameter <code>[(page)]</code> is a parameter of the <code>ngb-pagination</code> Component whereas on the RHS, we have the <code>thePageNumber</code> which is a property of the <code>ProductListComponent</code>. When the user clicks the "page" navigation link, then in the background, the TypeScript component, <code>thePageNumber</code> property is updated based on the user action. So, for example, if the user clicks on 4, then <code>thePageNumber</code> is set to 4.</p>
+                    <p>But, on the other hand, if the TypeScript code updates the <code>thePageNumber</code>, then the UI Component is updated automatically using two-way binding. So, this is a binding from the TypeScript Code to the HTML Template.</p>
+                </li>
+                <li>
+                    <b><code>[pageSize]="thePageSize"</code></b>: 
+                    <p>This is a one-way binding.</p>
+                    <p>On the LHS, <code>pageSize</code> is the parameter for the <code>ngb-pagination</code> component whereas in the RHS, <code>thePageSize</code> is a property of the <code>ProductListComponent</code>.</p>
+                    <p>If our TypeScript code updates <code>thePageSize</code>, then the UI Component is updated automatically and so, based on this, they'll change how many pages are listed based on <code>thePageSize</code>.</p>
+                </li>
+                <li>
+                    <b><code>[collectionSize]="theTotalElements"</code></b>: 
+                    <p>This is a one-way binding.</p>
+                    <p>If our TypeScript code updates the <code>theTotalElements</code>, then the UI Component is updated automatically. So, this will determine how the pagination controller's displayed based on the <code>collectionSize</code> or how many items are there.</p>
+                </li>
+                <li>
+                    <b><code>(pageChange)="listProducts()"</code></b>: 
+                    <p>This is an Event Binding.</p>
+                    <p>So, for a <code>pageChange</code> Event, when the user clicks the a page navigation link, then it'll call the method <code>listProducts()</code>. This will allow us to access information from the database based on <code>thePageNumber</code>, <code>thePageSize</code>, etc. and return those items and update the actual template as:</p>
+                    <pre><code>
+                        export class ProductListComponent implements OnInit{
+                            ...
+                            listProducts(){
+                                this.searchMode = ...;
+                                if(this.searchMode){
+                                    this.handleSearchProducts();
+                                }
+                                else{
+                                    this.handleListProducts();
+                                }
+                            }
+                        }
+                    </code></pre>
+                    <p>This is how we show a new page of products based on user actions.</p>
+                </li>
+            </ol>
         </li>
     </ol>
 </p>
