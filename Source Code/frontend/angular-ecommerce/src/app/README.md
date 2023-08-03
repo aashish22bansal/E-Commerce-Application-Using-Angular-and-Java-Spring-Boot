@@ -654,3 +654,181 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
     </code></pre>
     <p>This component will generate links for pagination.</p>
 </p>
+
+## Pagination - Development Process
+<p>
+    <p>The steps to be followed for this process are:</p>
+    <ol>
+        <li>
+            <b>Install <code>ng-bootstrap</code></b>:
+            <p>For this, we will run the following commands in the Angular project directory:</p>
+            <ul>
+                <li>
+                    <code>> ng add @angular/localize</code>
+                    <p>This is a dependency for Angular v9+.</p>
+                </li>
+                <li>
+                    <code>> npm install @ng-bootstrap/ng-bootstrap@13.0.0</code>
+                    <p>This will intall the <code>ng-bootstrap</code> component framework.</p>
+                </li>
+            </ul>
+            <p>We will also need to import the module for pagination in the <code>app.module.ts</code> file and add an entry for imports as</p>
+            <pre><code>
+                import { NgModule } from '@ng-bootstrap/ng-bootstrap';
+                @NgModule({
+                    ...
+                    imports: [
+                        RouterModule.forRoot(routes),
+                        BrowserModule,
+                        HttpClientModule,
+                        <b>NgbModule</b>
+                    ],
+                    ...
+                })
+                export class AppModule{}
+            </code></pre>
+        </li>
+        <li>
+            <b>Refactor the interface for <code>GetResponseProducts</code></b>:
+            <p>We currently use the interface <code>GetResponseProducts</code> to map the JSON Data from the REST API to the TypeScript objects as:</p>
+            <b>JSON:</b>
+            <pre><code>
+                {
+                    "_embedded": {
+                        "products": [{
+                            "id": 1,
+                            "sku": "BOOK-TECH-1000",
+                            "name": "Crash Course in Python"
+                            ...
+                        }, {
+                            "id": 2,
+                            "sku": "BOOK-TECH-1001",
+                            "name": "Become a Guru in JavaScript"
+                            ...
+                        }]
+                    }
+                }
+            </code></pre>
+            <b>TypeScript:</b>
+            <pre><code>
+                interface GetResponseProducts{
+                    _embedded: {
+                        products: Products[];
+                    }
+                }
+            </code></pre>
+            <p>We have the <code>_embedded</code> which contains the <code>products</code>.</p>
+            <p>We know that the Response Metadata has some valuable information for pagination as:</p>
+            <pre><code>
+                << array of products >>
+                "page": {
+                    "size": 10,
+                    "totalElements": 200,
+                    "totalPages": 20,
+                    "number": 0
+                }
+            </code></pre>
+            <p>We need to grab this data and map this data to the TypeScript code. We can refactor the interface to support pagination as:</p>
+            <b>JSON:</b>
+            <pre><code>
+                {
+                    "_embedded": {
+                        "products": [{
+                            "id": 1,
+                            "sku": "BOOK-TECH-1000",
+                            "name": "Crash Course in Python"
+                            ...
+                        }, {
+                            "id": 2,
+                            "sku": "BOOK-TECH-1001",
+                            "name": "Become a Guru in JavaScript"
+                            ...
+                        }]
+                    },
+                    "page": {
+                        "size": 10,
+                        "totalElements": 200,
+                        "totalPages": 20,
+                        "number": 0
+                    }
+                }
+            </code></pre>
+            <b>TypeScript:</b>
+            <pre><code>
+                interface GetResponseProducts{
+                    _embedded: {
+                        products: Products[];
+                    },
+                    page: {
+                        size: number,
+                        totalElements: number,
+                        totalPages: number,
+                        number: number
+                    }
+                }
+            </code></pre>
+            <p>This will help us capture and use that information.</p>
+        </li>
+        <li>
+            <b>Add Pagination support to <code>ProductService</code></b>: 
+            <p>To the <code>product.service.ts</code> file, we will add a new method:</p>
+            <pre><code>
+                getProductListPaginate( thePage: number,
+                                        thePageSize: number,
+                                        theCategoryId: number): Observable< GetResponseProducts >{
+                    const url = `${this.baseUrl}/search/findByCategoryId` + `?id=${theCategoryId}&page=${thePage}&size=${thePageSize}`;
+                    return this.httpClient.get< GetResponseProducts >(url);
+                }
+            </code></pre>
+            <p>In the above method, we pass the parameters for pagination and we send the parameters using the URL.</p>
+        </li>
+        <li>
+            <b>Update <code>ProductListComponent</code> to handle Pagination</b>: 
+            <p>We will update the <code>product-list.component.ts</code> file as:</p>
+            <pre><code>
+                export class ProductListComponent implements OnInit{
+                    // New Properties for Pagination
+                    thePageNumber: number = 1;
+                    thePageSize: number = 10;
+                    theTotalElements: number = 0;
+                    ...
+                    handleListProducts(){
+                        ...
+                        // Get the products for the given Category ID
+                        // by calling the Service and passing the parameters
+                        this.productService.getProductListPaginate(
+                            this.thePageNumber - 1,
+                            this.thePageSize,
+                            this.currentCategoryId
+                        ).subscribe(
+                            // Processing the result coming from backend
+                            data => {
+                                this.products = data._embedded.products;
+                                this.thePageNumber = data.page.number + 1;
+                                this.thePageSize = data.page.size;
+                                this.theTotalElements = data.page.totalElements;
+                            } // end of data
+                            /**
+                                Here, when the data arrives from the product
+                                service, we will set the properties based on
+                                the data.
+                                Here, everything on the RHS of the assignment
+                                is data from Spring Data REST JSON.
+                            */
+                        ); // end of subscribe()
+                    } // end of handleListProducts() method
+                    /**
+                        In the above method, we have used this.thePageNumber-1 
+                        because in Angular, Pagination is 1-based where in Spring 
+                        Data REST, Pagination is 0-based.
+                    */
+                }
+            </code></pre>
+            <p>So, we define some new properties for pagination.</p>
+        </li>
+        <li>
+            <b>Enhance the HTML Template to use <code>ng-bootstrap</code> pagination component</b>: 
+            <p></p>
+        </li>
+    </ol>
+</p>
