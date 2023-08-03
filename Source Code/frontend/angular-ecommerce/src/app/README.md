@@ -583,3 +583,74 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
         </li>
     </ol>
 </div>
+
+# Pagination
+<p>Pagination is useful for handling large amounts of data as it will show the user a small subset of data. The user would be provided with a link for use to view the other pages.</p>
+
+## Pagination Concepts
+<p>So, we query the database for a list of products and we will show the user for a page of data. So, we don't show the user everything but only a part of the data at a time. We might have a huge number of records but we will return only a small subset of it.</p>
+<p>We will create the Pagination support using Spring Boot (from back-end) and Angular (for front-end). In Spring Boot, we will be using the concept of Spring Data REST which provides the support for it.</p>
+
+### Spring Data REST - Parameters
+<p>
+    <p>By default, Spring Data REST return 20 elements but we can customize it by passing parameters as:</p>
+    <ul>
+        <li><b><code>page</code></b>: It provides the page number to access. It is 0-based (which means it defaults to 0).</li>
+        <li><b><code>size</code></b>: It returns the size of the page or, basically, the number of items per page.</li>
+    </ul>
+</p>
+
+## Pagination Example
+<p>
+    <p>We can understand the Pagination using the following example:</p>
+    <p>Page 1 URL: <code>http://localhost:8080/api/products?page=<b>0</b>&size=10</code></p>
+    <p>Page 2 URL: <code>http://localhost:8080/api/products?page=<b>1</b>&size=10</code></p>
+    <p>In the above URLs, we can see that the first URL is the first page and the second URL is the second page. Since everything is 0-based, the page numbers start from 0.</p>
+</p>
+
+## Spring Data REST - Response Metadata
+<p>
+    <p>While using Spring Data REST, the Response Metadata has valuable information, for example, in the JSON Response, we have the array of product and we have a section which has information about the page, for example:</p>
+    <pre><code>
+        << array of products >>
+        "page": {
+            "size": 10,
+            "totalElements": 200,
+            "totalPages": 20,
+            "number": 0
+        }
+    </code></pre>
+    <p>In the above response, we have:</p>
+    <ul>
+        <li><b><code>size</code></b>: It represents the size of the page.</li>
+        <li><b><code>totalElements</code></b>: It represents the grand total of all the elements in the database for this query but we are not returning all the elements and just the count for informational purposes only.</li>
+        <li><b><code>totalPages</code></b>: It represents the total pages that are available.</li>
+        <li><b><code>number</code></b>: It represents the current page number that we are viewing in this JSON Response.</li>
+    </ul>
+</p>
+
+## Pagination with Angular
+<p>
+    <p>For Pagination in Angular, we will make use of the <code>ng-bootstrap</code> Framework. It provides certain bootstrap widgets which can be used in an Angular way to take advantage of the framework.</p>
+</p>
+
+### Pagination Component in <code>ng-bootstrap</code>
+<p>
+    <p>The Pagination Component has a number of different components:</p>
+    <ul>
+        <li><b><code>page</code></b>: It represents the page number of access. It is 1-based which means that it defaults to 1.</li>
+        <li><b><code>pageSize</code></b>: It represents the size of the page, which defaults to 10.</li>
+        <li><b><code>collectionSize</code></b>: It represents the total number of items.</li>
+        <li><b><code>pageChange</code></b>: It is the Event Handler for the page change events.</li>
+    </ul>
+    <p>We can use the Pagination component as:</p>
+    <pre><code>
+        < ngb-pagination [(page)]="thePageNumber"
+                         [pageSize]="thePageSize"
+                         [collectionSize]="theTotalElements"
+                         (pageChange)="listProducts()"
+        >
+        < /ngb-pagination >
+    </code></pre>
+    <p>This component will generate links for pagination.</p>
+</p>
