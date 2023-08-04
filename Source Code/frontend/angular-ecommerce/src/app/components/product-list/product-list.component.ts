@@ -19,6 +19,15 @@ export class ProductListComponent implements OnInit{
   searchMode: boolean = false;
 
   /**
+   * Adding new Properties for Pagination.
+   */
+  thePageNumber: number = 1; // Represents the current page number.
+  thePageSize: number = 10; // Represents the number of items per page.
+  theTotalElements: number = 0;
+  previousCategoryId: number = 1;
+
+
+  /**
    * 
    * @param productService 
    * @param route 
@@ -90,6 +99,16 @@ export class ProductListComponent implements OnInit{
    * After this, we will obtain the products for that value of the Category ID. For this, 
    * we will pass the this.currentCategoryId to the getProductList() method which is mapped
    * to product.service.ts file.
+   * 
+   * 
+   * For the Concept of Pagination, we will have to check if we have a different category than
+   * previous.
+   * NOTE: Angular will reuse a component if it is currently being viewed. Angular may not always
+   *       create a new component everytime. If a component is currently being used in the browser,
+   *       then Angular will simply reuse that component, so to handle it we will need to perform
+   *       some additional operations.
+   *       This needs to be done to reset the page number or if resetting the page number is required.
+   *       If we have a different Category ID, then we will reset the Page Number to 1.
    */
   handleListProducts(){
     // obtaining the passed value
@@ -105,11 +124,29 @@ export class ProductListComponent implements OnInit{
       this.currentCategoryId = 1;
     }
 
-    // Calling the ProductService and subscribing to the data.
-    // Fetching the products for the given Category ID.
-    this.productService.getProductList(this.currentCategoryId).subscribe(
+    // If we have a different Category ID, then we will reset the Page Number to 1.
+    if(this.previousCategoryId != this.currentCategoryId){
+      this.thePageNumber = 1;
+    }
+    // Now, we need to keep track of the Category ID.
+    this.previousCategoryId = this.currentCategoryId;
+    console.log(`currentCategoryId=${this.currentCategoryId}, thePageNumber=${this.thePageNumber}`);
+    // Now, we need to obtain the products for the given Category ID by calling the service getProductListPaginate() as:
+    //  Calling the ProductService and subscribing to the data.
+    //  Fetching the products for the given Category ID.
+    this.productService.getProductListPaginate(this.thePageNumber-1, // This is required because in Angular, pages are 1-based whereas in Spring Boot, pages are 0-based
+                                               this.thePageSize, 
+                                               this.currentCategoryId
+                                              ).subscribe( // Mapping data from the JSON Data to the Property Response
       data => {
-        this.products = data;
+        /**
+         * In this, on the LHS, we have the properties defined in the class and in the RHS, we have the data from Spring Data REST JSON
+         * which is from the Interface GetResponseProducts.
+         */
+        this.products = data._embedded.products;
+        this.thePageNumber = data.page.number + 1; // This is required because in Angular, pages are 1-based whereas in Spring Boot, pages are 0-based
+        this.thePageSize = data.page.size;
+        this.theTotalElements = data.page.totalElements;
       }
     )
   }
