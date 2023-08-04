@@ -34,6 +34,21 @@ export class ProductService {
   }
 
   /**
+   * @param thePage: It is used to show the Page.
+   * @param thePageSize: It is used to represent the Page Size.
+   * @param theCategoryId: It represents the ID of the Category.
+   * @param GetResponseProducts: It is used because we need to access the data in the calling application.
+   * @returns the URL for required element along the concept of pagination.
+   * 
+   * We know that the Spring Data REST supports pagination, so we just send the parameters for page and size in the URL.
+   */
+  getProductListPaginate(thePage: number, thePageSize: number, theCategoryId: number): Observable<GetResponseProducts>{
+    // need to build URL based on Category ID, Page and Size of the Page.
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}&page=${thePage}&size=${thePageSize}`;
+    return this.httpClient.get<GetResponseProducts>(searchUrl);
+  }
+
+  /**
    * Query Method
    * @param theKeyword: It is provided by the user.
    */
@@ -71,6 +86,12 @@ export class ProductService {
 interface GetResponseProducts{
   _embedded: {
     products: Product[];
+  },
+  page: {
+    size: number,
+    totalElements: number,
+    totalPages: number,
+    number: number
   }
 }
 
