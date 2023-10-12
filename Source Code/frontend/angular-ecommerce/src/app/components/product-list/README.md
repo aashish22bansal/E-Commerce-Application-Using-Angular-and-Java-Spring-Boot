@@ -17,3 +17,43 @@
             display: "No products found."
     </code></pre>
 </div>
+
+## Pagination Component (User's Choice)
+<div>
+    <p>Now, we will let the user decide the number of Products which should be visible on the screen.</p>
+    <p>For this, we can follow the following Development Process:</p>
+    <ol>
+        <li>
+            <b>Add drop-down list for page size to HTML Template</b>: For this, we will simply use a <code>select</code> tag as:
+            <div>
+                <pre><code>
+                    ...
+                    < span class="mr-2">Page Size< /span >
+                    < select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                        < option selected="true" >5< /option >
+                        < option >10< /option >
+                        < option >20< /option >
+                        < option >50< /option >
+                    < /select >
+                    ...
+                </code></pre>
+            </div>
+            <div>
+                <p>We will define the name of the HTML Element and then we will add an Event Binding for the OnChange() Event. So, basically, when the user selects a page and we are going to call a method, <code>updatePageSize(...)</code>, defined in the <code>.component.ts</code> file, and pass the value selected by the User.</p>
+            </div>
+        </li>
+        <li>
+            <b>Update <code>ProductListComponent</code> for setting the Page Size</b>: Now, we had a call to the method <code>updatePageSize(...)</code> which can be defined as:
+            <div>
+                <pre><code>
+                    updatePageSize(pageSize: string){
+                        this.thePageSize = +pageSize;
+                        this.thePageNumber = 1;
+                        this.listProducts();
+                    }
+                </code></pre>
+            </div>
+            <div>So, this method will simply take the parameter of page size and will simply set the Page Size based on that parameter value.</div>
+        </li>
+    </ol>
+</div>
