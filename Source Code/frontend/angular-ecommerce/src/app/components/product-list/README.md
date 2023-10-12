@@ -57,3 +57,14 @@
         </li>
     </ol>
 </div>
+
+## Pagination - Max Size
+<div>
+    <p>Now, if we have too many pages or too less products, then it is possible that the UI might start giving us a glitch. Now, if we happen to have a large number of products, then it is possible that the Selector will start running off the Screen. To prevent this, we can show only the maximum number of pages. Now, if we have very less number of products, then we will also need to manage that. For this, we will set a new parameter on the <code>ngb-pagination</code> component known as <code>[maxSize]</code> which will show the provided number of pages, and then it will display the max number of pages based on number of products per page.</p>
+</div>
+
+
+## Pagination - Boundary Links
+<div>
+    <p>This will allow the User to jump to the beginning or the end of the pages instantly. This will prevent the User from scrolling through every page. We can allow this by using the <code>[boundaryLinks]</code> parameter and setting it to <code>true</code>.</p>
+</div>

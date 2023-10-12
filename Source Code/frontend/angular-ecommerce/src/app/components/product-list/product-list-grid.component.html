@@ -32,6 +32,8 @@
                             <div class="col-md-9" style="padding-left: 30%">
                                 <ngb-pagination [(page)]="thePageNumber"
                                                 [pageSize]="thePageSize"
+                                                [maxSize]="5"
+                                                [boundaryLinks]="true"
                                                 [collectionSize]="theTotalElements"
                                                 (pageChange)="listProducts()">
                                                 <!-- Here, in the LHS, the Parameters are for ngb-pagination component where in the RHS,
