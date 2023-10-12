@@ -22,7 +22,7 @@ export class ProductListComponent implements OnInit{
    * Adding new Properties for Pagination.
    */
   thePageNumber: number = 1; // Represents the current page number.
-  thePageSize: number = 10; // Represents the number of items per page.
+  thePageSize: number = 5; // Represents the number of items per page.
   theTotalElements: number = 0;
   previousCategoryId: number = 1;
 
@@ -149,6 +149,17 @@ export class ProductListComponent implements OnInit{
         this.theTotalElements = data.page.totalElements;
       }
     )
+  }
+
+  /**
+   * 
+   * @param pageSize represents the Page Size selected by the User.
+   * The below method will change the number of products displayed to the same number passed in the parameter.
+   */
+  updatePageSize(pageSize: string){
+    this.thePageSize = +pageSize;
+    this.thePageNumber = 1;
+    this.listProducts(); // This will refresh the PageView based the number of products selected.
   }
 
 }
