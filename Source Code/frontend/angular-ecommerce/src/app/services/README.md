@@ -6,3 +6,13 @@
 <p>The <code>getProductCategories()</code> method is used to obtain the Product Categories and this method would return an <code>Observable<></code> of type <code>ProductCategory</code> Array because we are returning a list of Product Categories.</p>
 
 <p>Within the Product Service, we will also create a new interface named, <code>GetResponseProductCategory</code>, which will have an array of <code>productCategory</code>. This would be used to call the REST API.</p>
+
+## Pagination - Keyword Search
+<div>
+    <p>We can add the Pagination Process for the Keyword Search using the following Development Process:</p>
+    <ol>
+        <li><b>Add Pagination Support to ProductService:</b> In this, we will create a new method <code>searchProductsPaginate()</code> to build the Search URL. Also, the Spring Data REST supports Pagination, so all we have to do is send the parameters for Page and Size.</li>
+        <li><b>Update ProductListComponent to handle Pagination:</b> In this, inside the <code>handleSearchProducts()</code> method, we call the service and we pass the Page Number, Page Size and Keyword as parameters. Also, we will have to decrement the Page Number by 1 because the Pagination Component pages are 1-based and in Spring Data REST, the pages are 0-based. Then, we will <code>subscribe()</code> to this method.</li>
+    </ol>
+    <p>So, we take a JSON Response and map it to the fields in the Angular Component.</p>
+</div>
