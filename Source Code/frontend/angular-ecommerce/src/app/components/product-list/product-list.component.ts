@@ -26,6 +26,11 @@ export class ProductListComponent implements OnInit{
   theTotalElements: number = 0;
   previousCategoryId: number = 1;
 
+  /**
+   * Keyword Pagination Search
+   */
+  previousKeyword: string = "";
+
 
   /**
    * 
@@ -70,6 +75,19 @@ export class ProductListComponent implements OnInit{
   }
 
   /**
+   * Within this method, we wil take the JSON Response and we will map it to the fields here in this class.
+   * So, all of the Pagination data and so forth will be assigned accordingly.
+   */
+  processResult(){
+    return (data: any) => {
+      this.products = data._embedded.products; // This is the information coming back from the JSON Response
+      this.thePageNumber = data.page.number + 1;
+      this.thePageSize = data.page.size;
+      this.theTotalElements = data.page.totalElements;
+    }
+  }
+
+  /**
    * Adding new method called handleSearchProducts().
    * In this, we first need to obtain the actual keyword ("theKeyword") that the user passed in,
    * basically reading a parameter. Then, we will search for products using that given 
@@ -78,12 +96,37 @@ export class ProductListComponent implements OnInit{
   handleSearchProducts(){
     const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!; // Note the Exclamation Mark.
 
+    /**
+     * If we have a different keyword than the previousKeyword, then we can set thePageNumber Parameter to 1.
+     * We have implemented something similar for the Category IDs when we were making use of listingProducts.
+     */
+    if(this.previousKeyword != theKeyword){
+      this.thePageNumber = 1; // With this, we are basically resetting it if there is a new keyword coming through
+    }
+
+    // Keeping track of the keyword
+    this.previousKeyword = theKeyword;
+
+    // Debugging Purpose
+    console.log(`keyword=${theKeyword}, thePageNumber=${this.thePageNumber}`);
+
     // Search for Products using theKeyword
-    this.productService.searchProducts(theKeyword).subscribe(
-      data => {
-        this.products = data;
-      }
-    );
+    // this.productService.searchProducts(theKeyword).subscribe(
+    //   data => {
+    //     this.products = data;
+    //   }
+    // );
+
+    /**
+     * Now, we will search for products using the new method and update the previous section (above) code as:
+     */
+    this.productService.searchProductsPaginate(
+        this.thePageNumber-1, 
+        this.thePageSize, 
+        theKeyword
+      ).subscribe(
+        this.processResult() // This will make a call to the processResult() method
+      );
   }
 
   /**
@@ -138,16 +181,19 @@ export class ProductListComponent implements OnInit{
                                                this.thePageSize, 
                                                this.currentCategoryId
                                               ).subscribe( // Mapping data from the JSON Data to the Property Response
-      data => {
-        /**
-         * In this, on the LHS, we have the properties defined in the class and in the RHS, we have the data from Spring Data REST JSON
-         * which is from the Interface GetResponseProducts.
-         */
-        this.products = data._embedded.products;
-        this.thePageNumber = data.page.number + 1; // This is required because in Angular, pages are 1-based whereas in Spring Boot, pages are 0-based
-        this.thePageSize = data.page.size;
-        this.theTotalElements = data.page.totalElements;
-      }
+      
+      // data => {
+      //   /**
+      //    * In this, on the LHS, we have the properties defined in the class and in the RHS, we have the data from Spring Data REST JSON
+      //    * which is from the Interface GetResponseProducts.
+      //    */
+      //   this.products = data._embedded.products;
+      //   this.thePageNumber = data.page.number + 1; // This is required because in Angular, pages are 1-based whereas in Spring Boot, pages are 0-based
+      //   this.thePageSize = data.page.size;
+      //   this.theTotalElements = data.page.totalElements;
+      // }
+      // Refactoring the above code with the below reusable method
+      this.processResult()
     )
   }
 

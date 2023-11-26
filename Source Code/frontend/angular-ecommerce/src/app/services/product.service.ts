@@ -72,7 +72,7 @@ export class ProductService {
    * 
    * This method is used to Paginate the Keyword Search for the Application.
    */
-  searchProductsPaginate(thePage: number, thePageSize: number, theKeyword: number): Observable<GetResponseProducts>{
+  searchProductsPaginate(thePage: number, thePageSize: number, theKeyword: string): Observable<GetResponseProducts>{
     // need to build URL based on Category ID, Page and Size of the Page.
     const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}&page=${thePage}&size=${thePageSize}`;
     return this.httpClient.get<GetResponseProducts>(searchUrl);
