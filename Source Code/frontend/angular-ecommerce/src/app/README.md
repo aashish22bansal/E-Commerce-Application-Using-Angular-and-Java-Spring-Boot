@@ -883,3 +883,60 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
         </li>
     </ol>
 </p>
+
+## Shopping Cart Status Component
+<div>
+    <p>For adding products to the Shopping Cart, we will use the "Add to Cart" button. Upon clicking the button, it should update the Shopping Cart Status which is keeping track of the total price and the total number of items in the shopping cart.</p>
+</div>
+
+### Overview of Entire Shopping Cart Process
+<div>
+    <ol>
+        <li>Cart Status Component: On main page, display total price and quantity.</li>
+        <li>Cart Details Page: List the items in the cart.</li>
+        <li>Cart Details Page: add/remove items</li>
+        <li>Checkout button</li>
+        <li>Checkout Form</li>
+    </ol>
+</div>
+
+### Add Products to Shopping Cart - Development Process
+<div>
+    <ol>
+        <li><b>Create new Component - CartStatusComponent</b>: This CartStatusComponent will keep track of the total price and the number of items (quantity) for the shopping cart. We will create the component using the command: <code>ng generate component components/cart-status</code></li>
+        <li>
+            <b>Add the HTML Template for CartStatusComponent</b>: We will add HTML Content to this CartStatusComponent as:
+            <pre><code>
+                < div class="cart-area d-n" >
+                    < a href="shopping-detail.html" >
+                        < div class="total" >$36.98
+                            <span>2</span>
+                        < /div >
+                        < i class="fa fa-shopping-cart" >< /i >
+                    < /a >
+                < /div >
+            </code></pre>
+            <p>This code contains status values at this point, and we will make them dynamic later.</p>
+        </li>
+        <li>
+            <b>Add click handler for "Add to cart" button</b>: For the buttons on the <code>product-list-grid</code>, we will have this button for adding the item to the cart as:
+            <pre><code>
+                < !-- loop over the collection of products -- >
+                < div *ngFor="let tempProduct of products" class="col-md-3" >
+                    ...
+                    < button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm" >Add to cart< /button >
+                < /div >
+            </code></pre>
+            <p>In this code, we have <code>(click)="addToCart(tempProduct)"</code>, and then we will add the Click Handler here. So, on click event, we are going to call this method, <code>addToCart()</code>, and then we will pass in the product.</p>
+        </li>
+        <li><b>Update ProductListComponent with click handler method</b>: 
+            <pre><code>
+                addToCart(theProduct: Product){
+                    console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
+                }
+            </code></pre>
+            <p>We will add the logic for processing to this method.</p>
+        </li>
+    </ol>
+    <p></p>
+</div>
