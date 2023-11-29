@@ -208,4 +208,10 @@ export class ProductListComponent implements OnInit{
     this.listProducts(); // This will refresh the PageView based the number of products selected.
   }
 
+  addToCart(theProduct: Product){
+    console.log(`Adding to Cart: ${theProduct.name}, ${theProduct.unitPrice} `);
+
+    // Logic....
+  }
+
 }
