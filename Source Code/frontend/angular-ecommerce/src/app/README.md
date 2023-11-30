@@ -900,7 +900,7 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
     </ol>
 </div>
 
-### Add Products to Shopping Cart - Development Process
+### Add Products to Shopping Cart - Development Process (Part 1)
 <div>
     <ol>
         <li><b>Create new Component - CartStatusComponent</b>: This CartStatusComponent will keep track of the total price and the number of items (quantity) for the shopping cart. We will create the component using the command: <code>ng generate component components/cart-status</code></li>
@@ -939,4 +939,106 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
         </li>
     </ol>
     <p></p>
+</div>
+
+### Add Products to Shopping Cart - Development Process (Part 2)
+<div>
+    <ol>
+        <li>
+            <b>Create Model Class - <code>CartItem</code></b>: This class simply contains the essential fields of a product for use in the cart as:
+            <pre><code>
+                export class CartItems{
+                    id: string;
+                    name: string;
+                    imageUrl: string;
+                    unitPrice: number;
+                    quantity: number;
+                    constructor(product: Product){
+                        this.id = product.id;
+                        this.name = product.name;
+                        this.imageUrl = product.imageUrl;
+                        this.unitPrice = product.unitPrice;
+                        this.quantity = 1;
+                    }
+                }
+            </code></pre>
+        </li>
+        <li>
+            <b>Develop CartService</b>: We will develop the class <code>CartService</code> as:
+            <pre><code>
+                export class CartService{
+                    // Array of CartItem Objects
+                    cartItems: CartItem = [];
+                    totalPrice: Subject<number> = new Subject<number>();
+                    totalQuantity: Subject<number> = new Subject<number>();
+                }
+            </code></pre>
+            Here, Subject is a subclass of Observable. We can use the Subject to publish events in our code programatically. These events will be sent to all the subscribers.<br>
+            We will also update the <code>addToCart()</code> method as:
+            <pre><code>
+                export class CartService{
+                    // Objects
+                    cartItems: CartItem[] = [];
+                    ...
+                    addToCart(theCartItem: CartItem){
+                        // check if we already have the item in cart
+                        let alreadyExistsInCart: boolean = false;
+                        let existingCartItem: CartItem = undefined;
+                        // Checking
+                        if(this.cartItems.length > 0){
+                            // find the item(s) in the cart based on item id
+                            for(let tempCartItem of this.cartItems){
+                                if(tempCartItem.id === theCartItem.id){
+                                    existingCartItem = tempCartItem;
+                                    break;
+                                }
+                            }
+                            // check if we found it
+                            alreadyExistsInCart = (existingCartItem!=undefined)
+                            if(alreadyExistsInCart){
+                                // increment the quantity
+                                existingCartItem.quantity++;
+                            }
+                            else{
+                                // just add the item to the array
+                                this.cartItems.push(theCartItem);
+                            }
+                            // compute the cart quantity and cart total
+                            this.computeCartTotals();
+                        }
+                        ...
+                    }
+                }
+            </code></pre>
+        </li>
+        <li>
+            <b>Modify <code>ProductListComponent</code> to call <code>CartService</code></b>: 
+        </li>
+        <li>
+            <b>Enhance <code>CartStatusComponent</code> to subscribe to <code>CartService</code></b>: 
+        </li>
+        <li>
+            <b>Update <code>CartStatusComponent</code> HTML to display cart total price and quantity</b>: 
+        </li>
+    </ol>
+</div>
+
+### Application Interaction
+<div>
+    <p>We have:
+        <ul>
+            <li><code>ProductListComponent</code> which has the "Add to Cart" button</li>
+            <li><code>CardStatusComponent</code> for displaying the total price and quantity</li>
+            <li><code>CartService</code> which keeps track of all the items in the cart</li>
+        </ul>
+    </p>
+    <p>Now, the way it works is that:</p>
+    <ol>
+        <li>The <code>CardStatusComponent</code> can subscribe for events on the <code>CartService</code>.</li>
+        <li>When the user actually clicks on the "Add to Cart" button, the <code>ProductListComponent</code> will call the <code>CartService</code> which will manually keep track of all the items in the shopping cart.</li>
+        <li><code>CartService</code> will publish the events to all the subscribers. Among all the subscribers is the <code>CartStatusComponent</code>.</li>
+        <li>The <code>CartStatusComponent</code> will receive the event and then update the UI for the total price and quantity.</li>
+        <li></li>
+    </ol>
+    <p>So, the <code>CartService</code> here is an Observable</p>
 </div>
