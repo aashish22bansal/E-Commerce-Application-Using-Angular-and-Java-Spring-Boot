@@ -1010,15 +1010,88 @@ In the <code>app.module.ts</code>, we need to import the <code>HttpClientModule<
                     }
                 }
             </code></pre>
+            We will create the method <code>computeCartTotals()</code> as:
+            <pre><code>
+                computeCartTotals(){
+                    let totalPriceValue: number = 0;
+                    let totalQuantityValue: number = 0;
+                    // Here, we will simply loop through the complete list and make the computations
+                    for(let currentCartItem of this.cartItems){
+                        totalPriceValue += currentCartItem.quantity * currentCartItem.unitPrice;
+                        totalQuantityValue += currentCartItem.quantity;
+                    }
+                    /**
+                     * publish the new values ... all subscribers will receive the new data
+                     * 
+                     * This will publish one event for totalPrice and one event for totalQuantity.
+                     * 
+                     * The .next() method will generate/publish/send/emit the event. Since this 
+                     * method will be called twice, so we will receive two separate events.
+                     */
+                    this.totalPrice.next(totalPriceValue);
+                    this.totalQuantity.next(totalQuantityValue);
+                }
+            </code></pre>
+            So, this <code>CartStatusComponent</code> will subscribe the <code>CartService</code> and then we publish the events to all subscribers, so the <code>CartStatusComponent</code> will now get the events of this new data that we just sent out for <code>totalPrice</code> and <code>totalQuantity</code>.
         </li>
         <li>
-            <b>Modify <code>ProductListComponent</code> to call <code>CartService</code></b>: 
+            <b>Modify <code>ProductListComponent</code> to call <code>CartService</code></b>: We will update the <code>ProductListComponent</code> as:
+            <pre><code>
+                addToCart(theProduct: Product){
+                    console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
+                    // Creating the CartItem
+                    const theCartItem = new CartItem(theProduct);
+                    // TODO ... do the real work
+                    this.cartService.addToCart(theCartItem);
+                }
+            </code></pre>
+            Here, <code>CartItem</code> has information about the product along with the quantity. So, we will pass the <code>theCartItem</code> to the <code>addToCart()</code> method.
         </li>
         <li>
-            <b>Enhance <code>CartStatusComponent</code> to subscribe to <code>CartService</code></b>: 
+            <b>Enhance <code>CartStatusComponent</code> to subscribe to <code>CartService</code></b>: We will update our <code>CartStatusComponent</code> as:
+            <pre><code>
+                export class CartStatusComponent implements OnInit{
+                    totalPrice: number = 0.00;
+                    totalQuantity: number = 0;
+                    <br>
+                    // Injecting CartService
+                    constructor(private cartService: CartService){
+                        // Logic
+                    }
+                    <br>
+                    ngOnInit(): void{
+                        this.updateCartStatus();
+                    }
+                    <br>
+                    updateCartStatus(){
+                        // subscribe to the cart status totalPrice
+                        this.cartService.totalPrice.subscribe(
+                            /**
+                             * When new events are received, we simply make the assignments to update the UI.
+                             * This is the actual data that is being sent from actual CartService or published by the CartService.
+                             */
+                            data => this.totalPrice = data
+                        );
+                        <br>
+                        // subscribe to the cart status totalQuatity
+                        this.cartService.totalQuantity.subscribe(
+                            /**
+                             * When new events are received, we simply make the assignments to update the UI.
+                             * This is the actual data that is being sent from actual CartService or published by the CartService.
+                             */
+                            data => this.totalQuantity = data
+                        );
+                    }
+                }
+            </code></pre>
         </li>
         <li>
-            <b>Update <code>CartStatusComponent</code> HTML to display cart total price and quantity</b>: 
+            <b>Update <code>CartStatusComponent</code> HTML to display cart total price and quantity</b>: We will update the CartStatusComponent as:
+            <pre><code>
+                < div class="total">{{ totalPrice | currency:'USD' }}
+                    < span >{{ totalQuantity }}< /span >
+                < /div >
+            </code></pre>
         </li>
     </ol>
 </div>
