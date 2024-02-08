@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba6614b9-5cb1-415a-a66e-c364e2afddf0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/13.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/13.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/2.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/2.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/3.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/3.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/6.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/6.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/7.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/7.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/index.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/15.2.8/angular-webpack/8ef3d8b4b9e4b97eea337077e98538f77a1e3a5a/index.pack.old" afterDir="false" />
-    </list>
+    <list default="true" id="ba6614b9-5cb1-415a-a66e-c364e2afddf0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,26 +16,26 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2YjB5kRzHqR8StXESS14B00cs6i" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/aashi/GitHub/My Repositories/E-Commerce-Application-Using-Angular-and-Java-Spring-Boot/Source Code/frontend/angular-ecommerce",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/aashi/GitHub/My Repositories/E-Commerce-Application-Using-Angular-and-Java-Spring-Boot/Source Code/frontend/angular-ecommerce&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   },
-  "keyToStringList": {
-    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": [
+  &quot;keyToStringList&quot;: {
+    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: [
     ]
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
 </project>
